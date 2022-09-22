@@ -52,40 +52,50 @@ const metadata = {
 export const HomeView: FC = ({ }) => {
   const wallet = useWallet();
   const connection = new Connection("https://devnet.genesysgo.net/", "confirmed");
-  const [nft, setNft] = useState();
-
   const metaplex = new Metaplex(connection)
   metaplex.use(walletAdapterIdentity(wallet));
+
+  const [nft, setNft] = useState(null);
 
   const getAllNFTs = async () => {
     const task = await metaplex.nfts().findAllByOwner(wallet.publicKey);
     task.onSuccess(() => console.log(task.getResult()));
     task.run();
-  }
+  };
 
   const convertToJson = async () => {
     fetch(metadata.uri)
     .then((response) => response.json())
     .then((json) => setNft(json))
-  }
+  };
 
   const renderNotConnectedContainer = () => (
     <div>
       <p>Not connected</p>
     </div>
-  )
+  );
 
-  const renderConnectedContainer = () => (
-    <div>
-      <p>Connected</p>
-    </div>
-  )
+  const renderConnectedContainer = () => {
+    if (nft === null) {
+      return (
+        <div>
+          <p>Loading ...</p>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <p>{nft.collection.name}</p>
+        </div>
+      )
+    }
+  };
 
   useEffect(() => {
     if (wallet.publicKey) {
       convertToJson()
     }
-  }, [wallet.publicKey, convertToJson])
+  }, [wallet.publicKey, convertToJson]);
 
   return (
 
