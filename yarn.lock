@@ -525,6 +525,14 @@
   "resolved" "https://registry.npmjs.org/@ledgerhq/logs/-/logs-6.10.0.tgz"
   "version" "6.10.0"
 
+"@metaplex-foundation/beet-solana@^0.1.1":
+  "integrity" "sha512-QV2DbxjaJWLkMvn12OC09g+r7a6R0uNwf8msYuOUSw4cG7amXzvFb7s0bh4IxY3Rk8/0ma0PfKi/FEdC7Hi4Pg=="
+  "resolved" "https://registry.npmjs.org/@metaplex-foundation/beet-solana/-/beet-solana-0.1.1.tgz"
+  "version" "0.1.1"
+  dependencies:
+    "@metaplex-foundation/beet" ">=0.1.0"
+    "@solana/web3.js" "^1.31.0"
+
 "@metaplex-foundation/beet-solana@^0.3.0", "@metaplex-foundation/beet-solana@^0.3.1":
   "integrity" "sha512-tgyEl6dvtLln8XX81JyBvWjIiEcjTkUwZbrM5dIobTmoqMuGewSyk9CClno8qsMsFdB5T3jC91Rjeqmu/6xk2g=="
   "resolved" "https://registry.npmjs.org/@metaplex-foundation/beet-solana/-/beet-solana-0.3.1.tgz"
@@ -534,6 +542,15 @@
     "@solana/web3.js" "^1.56.2"
     "bs58" "^5.0.0"
     "debug" "^4.3.4"
+
+"@metaplex-foundation/beet@^0.2.0":
+  "integrity" "sha512-H570hkJxmx/FxET1OggPPLkPL7psYQa71rNI9NJjYRM8WXdrEvmI/IRIEUW2KR6RqwWWN3FvlRHnKoQUV/lQtA=="
+  "resolved" "https://registry.npmjs.org/@metaplex-foundation/beet/-/beet-0.2.0.tgz"
+  "version" "0.2.0"
+  dependencies:
+    "ansicolors" "^0.3.2"
+    "bn.js" "^5.2.0"
+    "debug" "^4.3.3"
 
 "@metaplex-foundation/beet@^0.4.0", "@metaplex-foundation/beet@>=0.1.0":
   "integrity" "sha512-2OAKJnLatCc3mBXNL0QmWVQKAWK2C7XDfepgL0p/9+8oSx4bmRAFHFqptl1A/C0U5O3dxGwKfmKluW161OVGcA=="
@@ -558,16 +575,16 @@
   "resolved" "https://registry.npmjs.org/@metaplex-foundation/cusper/-/cusper-0.0.2.tgz"
   "version" "0.0.2"
 
-"@metaplex-foundation/js@^0.15.0":
-  "integrity" "sha512-i+S4Z8fb9HIC+Yyx8Kaeau7jKFv8qIOE5pLsdQx4eGkqrQyxVynRyzP6EMsitkGJ11pHUYvrcmRmTvMYYV8pfQ=="
-  "resolved" "https://registry.npmjs.org/@metaplex-foundation/js/-/js-0.15.0.tgz"
-  "version" "0.15.0"
+"@metaplex-foundation/js@^0.14.0":
+  "integrity" "sha512-lhFonjtpDjtdzFXL3XKR2/Sv6n7B07dcMR0W8EL73pKcJc9FZ4HtBfM1GWZVYH6jDrYmLoZ4IhnzjQtS8B+M6g=="
+  "resolved" "https://registry.npmjs.org/@metaplex-foundation/js/-/js-0.14.1.tgz"
+  "version" "0.14.1"
   dependencies:
     "@bundlr-network/client" "^0.7.14"
-    "@metaplex-foundation/beet" "^0.4.0"
-    "@metaplex-foundation/beet-solana" "^0.3.0"
+    "@metaplex-foundation/beet" "^0.2.0"
+    "@metaplex-foundation/beet-solana" "^0.1.1"
     "@metaplex-foundation/mpl-auction-house" "^2.1.1"
-    "@metaplex-foundation/mpl-candy-machine" "^4.4.1"
+    "@metaplex-foundation/mpl-candy-machine" "4.3.0"
     "@metaplex-foundation/mpl-token-metadata" "^2.2.2"
     "@solana/spl-token" "^0.2.0"
     "@solana/web3.js" "^1.47.3"
@@ -595,10 +612,10 @@
     "@solana/web3.js" "^1.56.2"
     "bn.js" "^5.2.0"
 
-"@metaplex-foundation/mpl-candy-machine@^4.4.1":
-  "integrity" "sha512-5H3q78Gum5GgClTx/7VTUZwf7+Nn/m755S/5to/vBD1cEAaIcsGCw3uUwzKauDfCTMjVce7WbfTQf1CS0n3C1A=="
-  "resolved" "https://registry.npmjs.org/@metaplex-foundation/mpl-candy-machine/-/mpl-candy-machine-4.6.0.tgz"
-  "version" "4.6.0"
+"@metaplex-foundation/mpl-candy-machine@4.3.0":
+  "integrity" "sha512-Vgx0Ly+JGosXFFz/mz5eWKovZgAQBLSFAwuat/c+yGmT7FGlnCEqV3lsBsg+P8iiuG39DxCvNfBQEH8fsiuOlQ=="
+  "resolved" "https://registry.npmjs.org/@metaplex-foundation/mpl-candy-machine/-/mpl-candy-machine-4.3.0.tgz"
+  "version" "4.3.0"
   dependencies:
     "@metaplex-foundation/beet" "^0.4.0"
     "@metaplex-foundation/beet-solana" "^0.3.0"

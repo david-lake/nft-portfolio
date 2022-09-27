@@ -7,59 +7,17 @@ import { useWallet, useConnection } from '@solana/wallet-adapter-react';
 import { Metaplex, walletAdapterIdentity } from "@metaplex-foundation/js";
 import { Connection, clusterApiUrl, PublicKey } from "@solana/web3.js";
 
-const metadata = {
-    "model": "metadata",
-    "address": "7vPWtXZkZiEYm4NKpMgW7eJUZ1TRcqjxg79jb6W1tS2h",
-    "mintAddress": "ApusBjwNZkoYtbzpgjNYRgkkQYG4Rx9iGiAD12Bf37Tt",
-    "updateAuthorityAddress": "9AhZV9edy7LvLbAMnXWxuKv1j5sch6BzhbSXvHA84kcX",
-    "json": null,
-    "jsonLoaded": false,
-    "name": "Skellers World #1349",
-    "symbol": "GRRR",
-    "uri": "https://arweave.net/kCJs_Bh6umaQDD5UCk19WX8Vw75wnUClip7aOephNHY",
-    "isMutable": true,
-    "primarySaleHappened": true,
-    "sellerFeeBasisPoints": 1000,
-    "editionNonce": 255,
-    "creators": [
-        {
-            "address": "3Z7f2YopXD4EaKfvM758x3HAmHBDJEx337XvzC2RHWkL",
-            "verified": true,
-            "share": 0
-        },
-        {
-            "address": "Abqf1Le5PAXjai5PM5TiPEaeoLviy1Br6TAAf3EBDsLr",
-            "verified": false,
-            "share": 25
-        },
-        {
-            "address": "7rMKpF2FSFQysJ2BfLJnsBXqmbEoqG2FR5qDwBZVZaBH",
-            "verified": false,
-            "share": 25
-        },
-        {
-            "address": "JBHoivwwRKhpTNatpf4f3wLpyYHgnFdEwHGWn2EpdeFq",
-            "verified": false,
-            "share": 50
-        }
-    ],
-    "tokenStandard": null,
-    "collection": null,
-    "collectionDetails": null,
-    "uses": null
-}
-
 export const HomeView: FC = ({ }) => {
   const wallet = useWallet();
-  const connection = new Connection("https://devnet.genesysgo.net/", "confirmed");
+  const connection = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
   const metaplex = new Metaplex(connection)
   metaplex.use(walletAdapterIdentity(wallet));
 
-  const [nft, setNft] = useState(null);
+  const [nft, setNft] = useState();
 
   const getAllNFTs = async () => {
     const task = await metaplex.nfts().findAllByOwner(wallet.publicKey);
-    task.onSuccess(() => console.log(task.getResult()));
+    task.onSuccess(() => setNft(task.getResult()));
     task.run();
   };
 
@@ -76,26 +34,35 @@ export const HomeView: FC = ({ }) => {
   );
 
   const renderConnectedContainer = () => {
-    if (nft === null) {
+    if (!nft) {
       return (
         <div>
           <p>Loading ...</p>
         </div>
       )
     } else {
-      return (
-        <div>
-          <p>{nft.collection.name}</p>
-        </div>
-      )
+      if (nft.length > 0) {
+        return (
+          <div>
+            <p>Found nfts</p>
+          </div>
+        )
+      } else {
+        return (
+          <div>
+            <p>You have no nfts</p>
+          </div>
+        )
+      }
     }
   };
 
   useEffect(() => {
     if (wallet.publicKey) {
-      convertToJson()
+      getAllNFTs()
+      console.log(nft)
     }
-  }, [wallet.publicKey, convertToJson]);
+  }, [wallet.publicKey]);
 
   return (
 
