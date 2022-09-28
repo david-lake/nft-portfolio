@@ -13,18 +13,18 @@ export const HomeView: FC = ({ }) => {
   const metaplex = new Metaplex(connection)
   metaplex.use(walletAdapterIdentity(wallet));
 
-  const [nft, setNft] = useState();
+  const [nft, setNft] = useState(null);
 
-  const getAllNFTs = async () => {
-    const task = await metaplex.nfts().findAllByOwner(wallet.publicKey);
-    task.onSuccess(() => setNft(task.getResult()));
-    task.run();
-  };
-
-  const convertToJson = async () => {
-    fetch(metadata.uri)
-    .then((response) => response.json())
-    .then((json) => setNft(json))
+  const getNft = async () => {
+    let myNfts = await metaplex.nfts().findAllByOwner({ owner: wallet.publicKey }).run();
+    myNfts.filter((x) => x.primarySaleHappened === true);
+    if(!myNfts.length) {
+     setNft(null);
+     return;
+    }
+    let randIdx = Math.floor(Math.random() * myNfts.length);
+    const nft = await metaplex.nfts().load({ metadata: myNfts[randIdx] }).run();
+    setNft(nft);
   };
 
   const renderNotConnectedContainer = () => (
@@ -33,34 +33,23 @@ export const HomeView: FC = ({ }) => {
     </div>
   );
 
-  const renderConnectedContainer = () => {
-    if (!nft) {
-      return (
+  const renderConnectedContainer = () => (
+    <div>
+      {nft && (
         <div>
-          <p>Loading ...</p>
+          <h1>{nft.json.name}</h1>
+          <img
+            src={nft.json.image}
+            alt="Image of nft"
+          />
         </div>
-      )
-    } else {
-      if (nft.length > 0) {
-        return (
-          <div>
-            <p>Found nfts</p>
-          </div>
-        )
-      } else {
-        return (
-          <div>
-            <p>You have no nfts</p>
-          </div>
-        )
-      }
-    }
-  };
+      )}
+    </div>
+  );
 
   useEffect(() => {
     if (wallet.publicKey) {
-      getAllNFTs()
-      console.log(nft)
+      getNft()
     }
   }, [wallet.publicKey]);
 
