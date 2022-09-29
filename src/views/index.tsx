@@ -19,7 +19,7 @@ export const HomeView: FC = ({ }) => {
     let nfts = await metaplex.nfts().findAllByOwner({
       owner: wallet.publicKey
     }).run();
-    nfts = nfts.filter((x) => x.primarySaleHappened === true);
+    nfts = nfts.filter((nft) => nft.primarySaleHappened === true);
     if(!nfts.length) {
      setNfts(null);
      return;
@@ -36,15 +36,16 @@ export const HomeView: FC = ({ }) => {
 
   const renderConnectedContainer = () => (
     <div>
-      {nfts && (
+      {nfts && nfts.map((nft, index) => (
         <div className="nft-preview">
-          <h1></h1>
+          <h1>{nft.json.name}</h1>
           <img
-            src=""
+            src={nft.json.image}
             alt="Image of nft"
           />
         </div>
-      )}
+        ))
+       }
     </div>
   );
 

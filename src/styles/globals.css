@@ -25,6 +25,7 @@ a {
 }
 
 .nft-preview {
-  width: 600px;
-  height: 600px;
+  width: 400px;
+  height: 400px;
+  margin-top: 50px;
 }
