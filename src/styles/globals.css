@@ -24,3 +24,7 @@ a {
   background-color: #707070;
 }
 
+.nft-preview {
+  width: 600px;
+  height: 600px;
+}
