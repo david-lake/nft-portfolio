@@ -9,7 +9,7 @@ import { Connection, clusterApiUrl, PublicKey } from "@solana/web3.js";
 
 export const HomeView: FC = ({ }) => {
   const wallet = useWallet();
-  const connection = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
+  const connection = new Connection("https://ssc-dao.genesysgo.net/", "confirmed");
   const metaplex = new Metaplex(connection)
   metaplex.use(walletAdapterIdentity(wallet));
 
@@ -41,7 +41,7 @@ export const HomeView: FC = ({ }) => {
           <h1>{nft.json.name}</h1>
           <img
             src={nft.json.image}
-            alt="Image of nft"
+            alt={"Image of nft " + nft.json.name}
           />
         </div>
         ))
