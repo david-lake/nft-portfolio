@@ -41,6 +41,7 @@ export const HomeView: FC = ({ }) => {
         collections.map((collection, index) => (
           <div key={index} className="collection">
             <h1>{collection}</h1>
+            <hr></hr>
             {nfts.map((nft, index) => (
               nft.json.name.includes(collection) && (
                 <div key={index} className="nft-preview">
@@ -73,11 +74,9 @@ export const HomeView: FC = ({ }) => {
 
   return (
 
-    <div className="md:hero mx-auto p-4">
-      <div className="text-center">
-        {!wallet.publicKey && renderNotConnectedContainer()}
-        {wallet.publicKey && renderConnectedContainer()}
-      </div>
+    <div className="md:hero mx-auto p-6">
+      {!wallet.publicKey && renderNotConnectedContainer()}
+      {wallet.publicKey && renderConnectedContainer()}
     </div>
   );
 };
